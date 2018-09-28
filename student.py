@@ -60,6 +60,7 @@ class Piggy(pigo.Pigo):
         """executes a series of methods that add up to a compound dance"""
         print("\n---- LET'S DANCE ----\n")
         ##### WRITE YOUR FIRST PROJECT HERE
+        self.shake_body()
         self.dancing_forward()
         self.bob_head()
         self.shake_body()
@@ -67,6 +68,10 @@ class Piggy(pigo.Pigo):
         self.back_to_place()
         self.shake_body()
         self.bob_head()
+        self.dancing_forward()
+        self.bob_head()
+        self.turn_left()
+        self.turn_right()
         '''self.encF(18)
         self.encB(10)
         self.encR(36)
@@ -95,6 +100,7 @@ class Piggy(pigo.Pigo):
         for y in range(3):
             for x in range(self.MIDPOINT - 30, self.MIDPOINT +30, 15):
                 self.servo(x)
+        self.servo(self.MIDPOINT)
 
     def shake_body(self):
         self.servo(self.MIDPOINT - 30)
@@ -127,6 +133,15 @@ class Piggy(pigo.Pigo):
         for x in range(3):
             self.encB(10)
             self.encF(5)
+    def turn_right(self):
+        self.RIGHT_SPEED = 100
+        self.LEFT_SPEED = 160
+        self.encF(36)
+
+    def turn_left(self):
+        self.RIGHT_SPEED = 160
+        self.LEFT_SPEED = 100
+        self.encF(36)
 
     def obstacle_count(self):
         """scans and estimates the number of obstacles within sight"""
