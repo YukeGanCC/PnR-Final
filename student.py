@@ -70,8 +70,6 @@ class Piggy(pigo.Pigo):
         self.bob_head()
         self.dancing_forward()
         self.bob_head()
-        self.turn_left()
-        self.turn_right()
         '''self.encF(18)
         self.encB(10)
         self.encR(36)
@@ -129,14 +127,6 @@ class Piggy(pigo.Pigo):
         self.encB(3)
         time.sleep(1)
 
-    def back_to_place(self):
-        for x in range(3):
-            self.encB(10)
-            self.encF(5)
-    def turn_right(self):
-        self.RIGHT_SPEED = 100
-        self.LEFT_SPEED = 160
-        self.encF(36)
 
     def turn_left(self):
         self.RIGHT_SPEED = 160
