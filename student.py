@@ -63,6 +63,7 @@ class Piggy(pigo.Pigo):
         self.dancing_forward()
         self.bob_head()
         self.shake_body()
+        self.bob_head()
         self.back_to_place()
         self.shake_body()
         self.bob_head()
@@ -81,31 +82,46 @@ class Piggy(pigo.Pigo):
         self.encL(18)'''
     def dancing_forward(self):
         for x in range(3):
+            self.MIDPOINT = 50
             self.encR(2)
+            self.MIDPOINT = 75
             self.encF(5)
+            self.MIDPOINT = 100
             self.encL(2)
+            self.MIDPOINT = 75
             self.encF(5)
 
     def bob_head(self):
-        for x in range(self.MIDPOINT - 30, self.MIDPOINT +30, 5):
-            self.servo(x)
+        for y in range(4):
+            for x in range(self.MIDPOINT - 30, self.MIDPOINT +30, 15):
+                self.servo(x)
 
     def shake_body(self):
+        self.MIDPOINT = 100
         self.encL(26)
+        self.MIDPOINT = 50
         self.encR(26)
+        self.MIDPOINT = 75
         self.encF(3)
-        time.sleep(1)
+        self.MIDPOINT = 100
         self.encL(18)
+        self.MIDPOINT = 50
         self.encR(18)
+        self.MIDPOINT = 75
+        self.encB(3)
+        self.MIDPOINT = 100
+        self.encL(8)
+        self.MIDPOINT = 50
+        self.encR(8)
+        self.MIDPOINT = 75
+        self.encF(3)
+        self.MIDPOINT = 100
+        self.encL(2)
+        self.MIDPOINT = 50
+        self.encR(2)
+        self.MIDPOINT = 75
         self.encB(3)
         time.sleep(1)
-        self.encL(8)
-        self.encR(8)
-        self.encF(3)
-        self.encL(2)
-        self.encR(2)
-        self.encB(3)
-        time.sleep(2)
 
     def back_to_place(self):
         for x in range(3):
