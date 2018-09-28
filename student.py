@@ -94,17 +94,22 @@ class Piggy(pigo.Pigo):
         self.encL(36)
         self.encR(36)
         self.encB(3)
+        time.sleep(1)
         self.encL(26)
         self.encR(26)
         self.encF(3)
+        time.sleep(1)
         self.encL(18)
         self.encR(18)
         self.encB(3)
+        time.sleep(1)
         self.encL(8)
         self.encR(8)
         self.encF(3)
         self.encL(5)
         self.encR(5)
+        self.encB(3)
+        time.sleep(2)
 
     def back_to_place(self):
         for x in range(5):
