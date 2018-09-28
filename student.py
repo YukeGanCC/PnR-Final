@@ -82,17 +82,17 @@ class Piggy(pigo.Pigo):
         self.encL(18)'''
     def dancing_forward(self):
         for x in range(3):
-            self.servo(self.MIDPOINT + 30)
+            self.servo(self.MIDPOINT - 30)
             self.encR(2)
             self.servo(self.MIDPOINT)
             self.encF(5)
-            self.servo(self.MIDPOINT - 30)
+            self.servo(self.MIDPOINT + 30)
             self.encL(2)
             self.servo(self.MIDPOINT)
             self.encF(5)
 
     def bob_head(self):
-        for y in range(4):
+        for y in range(3):
             for x in range(self.MIDPOINT - 30, self.MIDPOINT +30, 15):
                 self.servo(x)
 
