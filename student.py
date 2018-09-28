@@ -62,12 +62,16 @@ class Piggy(pigo.Pigo):
         ##### WRITE YOUR FIRST PROJECT HERE
         self.encF(18)
         self.encB(10)
-        self.encR(18)
+        self.encR(36)
         self.encF(7)
         self.encB(5)
-        self.encL(18)
+        self.encL(36)
         self.wode_scan()
         self.encB(18)
+        self.encR(18)
+        self.encF(10)
+        self.encL(18)
+
 
     def obstacle_count(self):
         """scans and estimates the number of obstacles within sight"""
