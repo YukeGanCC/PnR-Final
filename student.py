@@ -62,10 +62,10 @@ class Piggy(pigo.Pigo):
         ##### WRITE YOUR FIRST PROJECT HERE
         self.encF(18)
         self.encB(10)
-        self.encR(5)
+        self.encR(18)
         self.encF(7)
         self.encB(5)
-        self.encL(5)
+        self.encL(18)
         self.wode_scan()
         self.encB(18)
 
