@@ -82,13 +82,13 @@ class Piggy(pigo.Pigo):
         self.encL(18)'''
     def dancing_forward(self):
         for x in range(3):
-            self.MIDPOINT = 50
+            self.servo(self.MIDPOINT + 30)
             self.encR(2)
-            self.MIDPOINT = 75
+            self.servo(self.MIDPOINT)
             self.encF(5)
-            self.MIDPOINT = 100
+            self.servo(self.MIDPOINT - 30)
             self.encL(2)
-            self.MIDPOINT = 75
+            self.servo(self.MIDPOINT)
             self.encF(5)
 
     def bob_head(self):
@@ -97,29 +97,29 @@ class Piggy(pigo.Pigo):
                 self.servo(x)
 
     def shake_body(self):
-        self.MIDPOINT = 100
+        self.servo(self.MIDPOINT - 30)
         self.encL(26)
-        self.MIDPOINT = 50
+        self.servo(self.MIDPOINT + 30)
         self.encR(26)
-        self.MIDPOINT = 75
+        self.servo(self.MIDPOINT)
         self.encF(3)
-        self.MIDPOINT = 100
+        self.servo(self.MIDPOINT - 30)
         self.encL(18)
-        self.MIDPOINT = 50
+        self.servo(self.MIDPOINT + 30)
         self.encR(18)
-        self.MIDPOINT = 75
+        self.servo(self.MIDPOINT)
         self.encB(3)
-        self.MIDPOINT = 100
+        self.servo(self.MIDPOINT - 30)
         self.encL(8)
-        self.MIDPOINT = 50
+        self.servo(self.MIDPOINT + 30)
         self.encR(8)
-        self.MIDPOINT = 75
+        self.servo(self.MIDPOINT)
         self.encF(3)
-        self.MIDPOINT = 100
+        self.servo(self.MIDPOINT - 30)
         self.encL(2)
-        self.MIDPOINT = 50
+        self.servo(self.MIDPOINT + 30)
         self.encR(2)
-        self.MIDPOINT = 75
+        self.servo(self.MIDPOINT)
         self.encB(3)
         time.sleep(1)
 
