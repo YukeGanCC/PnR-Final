@@ -64,11 +64,12 @@ class Piggy(pigo.Pigo):
         self.dancing_forward()
         self.bob_head()
         self.shake_body()
+        self.turn_back()
         self.bob_head()
-        self.back_to_place()
         self.shake_body()
         self.bob_head()
         self.dancing_forward()
+        self.turn_back()
         self.bob_head()
         '''self.encF(18)
         self.encB(10)
@@ -101,37 +102,29 @@ class Piggy(pigo.Pigo):
         self.servo(self.MIDPOINT)
 
     def shake_body(self):
-        self.servo(self.MIDPOINT - 30)
-        self.encL(26)
-        self.servo(self.MIDPOINT + 30)
-        self.encR(26)
-        self.servo(self.MIDPOINT)
-        self.encF(3)
-        self.servo(self.MIDPOINT - 30)
-        self.encL(18)
-        self.servo(self.MIDPOINT + 30)
-        self.encR(18)
-        self.servo(self.MIDPOINT)
-        self.encB(3)
-        self.servo(self.MIDPOINT - 30)
-        self.encL(8)
-        self.servo(self.MIDPOINT + 30)
-        self.encR(8)
-        self.servo(self.MIDPOINT)
-        self.encF(3)
-        self.servo(self.MIDPOINT - 30)
-        self.encL(2)
-        self.servo(self.MIDPOINT + 30)
-        self.encR(2)
-        self.servo(self.MIDPOINT)
-        self.encB(3)
+        for x in range(2):
+            self.servo(self.MIDPOINT - 30)
+            self.encL(26)
+            self.servo(self.MIDPOINT + 30)
+            self.encR(26)
+            self.servo(self.MIDPOINT)
+            self.encF(3)
+            self.servo(self.MIDPOINT - 30)
+            self.encL(18)
+            self.servo(self.MIDPOINT + 30)
+            self.encR(18)
+            self.servo(self.MIDPOINT)
+            self.encB(3)
         time.sleep(1)
 
 
-    def turn_left(self):
-        self.RIGHT_SPEED = 160
-        self.LEFT_SPEED = 100
-        self.encF(36)
+    def turn_back(self):
+        for x in range(2)
+            self.encB(5)
+            self.encR(20)
+            self.encB(5)
+            self.encL(10)
+
 
     def obstacle_count(self):
         """scans and estimates the number of obstacles within sight"""
