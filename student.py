@@ -131,10 +131,13 @@ class Piggy(pigo.Pigo):
         for y in range(2):
             for x in range(3):
                 self.encL(3)
-            for x in range(3):
+            for x in range(6):
                 self.encR(3)
+            for x in range(3):
+                self.encL(3)
         for x in range(3):
-            self.encB(3)
+            self.encB(5)
+            self.encF(2)
 
 
     def obstacle_count(self):
