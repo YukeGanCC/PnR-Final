@@ -63,7 +63,7 @@ class Piggy(pigo.Pigo):
         self.shake_body()
         self.dancing_forward()
         self.bob_head()
-        self.shake_body()
+        self.go_discontinuously()
         self.turn_back()
         self.bob_head()
         self.shake_body()
@@ -120,10 +120,21 @@ class Piggy(pigo.Pigo):
 
     def turn_back(self):
         for x in range(2):
-            self.encB(5)
-            self.encR(10)
-            self.encB(5)
-            self.encL(10)
+            self.encB(10)
+            self.encR(5)
+            self.encB(10)
+            self.encL(5)
+
+    def go_discontinuously(self):
+        for x in range(3):
+            self.encF(3)
+        for y in range(2):
+            for x in range(3):
+                self.encL(3)
+            for x in range(3):
+                self.encR(3)
+        for x in range(3):
+            self.encB(3)
 
 
     def obstacle_count(self):
