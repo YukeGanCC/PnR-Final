@@ -119,7 +119,7 @@ class Piggy(pigo.Pigo):
 
 
     def turn_back(self):
-        for x in range(2)
+        for x in range(2):
             self.encB(5)
             self.encR(20)
             self.encB(5)
