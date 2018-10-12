@@ -57,20 +57,22 @@ class Piggy(pigo.Pigo):
 
     # YOU DECIDE: How does your GoPiggy dance?
     def dance(self):
-        """executes a series of methods that add up to a compound dance"""
-        print("\n---- LET'S DANCE ----\n")
-        ##### WRITE YOUR FIRST PROJECT HERE
-        self.shake_body()
-        self.dancing_forward()
-        self.bob_head()
-        self.go_discontinuously()
-        self.turn_back()
-        self.bob_head()
-        self.shake_body()
-        self.bob_head()
-        self.dancing_forward()
-        self.turn_back()
-        self.bob_head()
+        if not self.safe_to_dance():
+            print("\n---- NOT SAFE TO DANCE ----\n")
+        if self.safe_to_dance():
+            print("\n----LET'S DANCE----\n")
+            self.shake_body()
+            self.dancing_forward()
+            self.bob_head()
+            self.go_discontinuously()
+            self.turn_back()
+            self.bob_head()
+            self.shake_body()
+            self.go_discontinuously()
+            self.bob_head()
+            self.dancing_forward()
+            self.turn_back()
+            self.bob_head()
         '''self.encF(18)
         self.encB(10)
         self.encR(36)
@@ -84,6 +86,14 @@ class Piggy(pigo.Pigo):
         self.encR(18)
         self.encF(10)
         self.encL(18)'''
+
+    def safe_to_dance(self):
+        for x in range(4):
+            if not self.is_clear():
+                return False
+            self.encR(7)
+        return True
+
     def dancing_forward(self):
         for x in range(3):
             self.servo(self.MIDPOINT - 30)
@@ -121,20 +131,20 @@ class Piggy(pigo.Pigo):
     def turn_back(self):
         for x in range(2):
             self.encB(10)
-            self.encR(5)
+            self.encR(3)
             self.encB(10)
-            self.encL(5)
+            self.encL(3)
 
     def go_discontinuously(self):
         for x in range(3):
             self.encF(3)
         for y in range(2):
             for x in range(3):
-                self.encL(3)
+                self.encL(1)
             for x in range(6):
-                self.encR(3)
+                self.encR(1)
             for x in range(3):
-                self.encL(3)
+                self.encL(1)
         for x in range(3):
             self.encB(5)
             self.encF(2)
