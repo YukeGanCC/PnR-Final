@@ -88,10 +88,10 @@ class Piggy(pigo.Pigo):
         self.encL(18)'''
 
     def safe_to_dance(self):
-        for x in range(4):
+        for x in range(10):
             if not self.is_clear():
                 return False
-            self.encR(7)
+            self.encR(3)
         return True
 
     def dancing_forward(self):
