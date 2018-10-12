@@ -88,7 +88,7 @@ class Piggy(pigo.Pigo):
         self.encL(18)'''
 
     def safe_to_dance(self):
-        for x in range(10):
+        for x in range(8):
             if not self.is_clear():
                 return False
             self.encR(3)
@@ -105,6 +105,7 @@ class Piggy(pigo.Pigo):
             self.servo(self.MIDPOINT)
             self.encF(5)
 
+    #From Mr.A
     def bob_head(self):
         for y in range(3):
             for x in range(self.MIDPOINT - 30, self.MIDPOINT +30, 15):
