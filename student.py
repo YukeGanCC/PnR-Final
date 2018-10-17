@@ -59,7 +59,7 @@ class Piggy(pigo.Pigo):
     def open_house(self):
         """reacts to dist measurement in a cute way"""
         while True:
-            if self.dist() < 20:
+            if self.dist() < 30:
                 self.escape()
             time.sleep(.1)
     def escape(self):
