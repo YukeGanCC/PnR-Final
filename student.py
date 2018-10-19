@@ -176,7 +176,7 @@ class Piggy(pigo.Pigo):
                     print("Object # %d found, I think" % counter)
                 if distance and distance > 200 and found_something:
                     found_something = False
-            print("\n----I SEE %d OBJECTS----\n" % counter)
+        print("\n----I SEE %d OBJECTS----\n" % counter)
 
     def safety_check(self):
         """subroutine of the dance method"""
