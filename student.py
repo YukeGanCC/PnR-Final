@@ -44,6 +44,7 @@ class Piggy(pigo.Pigo):
                 "d": ("Dance", self.dance),
                 "o": ("Obstacle count", self.obstacle_count),
                 "c": ("Calibrate", self.calibrate),
+                "t": ("Test", self.skill_test),
                 "s": ("Check status", self.status),
                 "h": ("Open House", self.open_house),
                 "q": ("Quit", quit_now)
@@ -56,12 +57,45 @@ class Piggy(pigo.Pigo):
         # activate the item selected
         menu.get(ans, [None, error])[1]()
 
+   def skill_test(self):
+       '''demonstrates two nav skills'''
+       choice = raw_input("Left/Right or Turn Until Clear?")
+       if "l" in choice: #picks left or right
+           self.wide_scan(count=4) #scan the area
+           # create two variables, left_total and right_total
+           left_total = 0
+           right_total = 0
+           # loop from self.MIDPOINT - 60 to self.MIDPOINT
+           for angle in range(self.MIDPOINT - 60, self.MIDPOINT):
+               if self.scan[angle]:
+                   # add up the numbers to right_total
+                   right_total += self.scan[angle]
+           # loop from self.MIDPOINT to self.MIDPOINT + 60
+           for angle in range(self.MIDPOINT, self.MIDPOINT + 60):
+               if self.scan[angle]:
+                   # add up the numbers to left_total
+                   left_total += self.scan[angle]
+           # if right is bigger:
+           if right_total > left_total:
+               # turn right
+               self.encR(5)
+           # if left is bigger:
+           if left_total > right_total:
+               # turn left
+               self.encL(5)
+
+
+       else:
+           #turns until it's clear
+           pass
+
     def open_house(self):
         """reacts to dist measurement in a cute way"""
         while True:
             if self.dist() < 30:
                 self.escape()
             time.sleep(.1)
+
     def escape(self):
         self.encB(5)
         self.encR(5)
