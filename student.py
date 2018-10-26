@@ -88,12 +88,9 @@ class Piggy(pigo.Pigo):
         else:
             print("I'll keep turning until it's clear")
             #while it's not clear
-            while True:
-                if not self.is_clear():
-                    self.encR(1)
-                else:
-                    pass
-                #turn
+            while not self.is_clear():
+                self.encR(1)
+
 
     def open_house(self):
         """reacts to dist measurement in a cute way"""
