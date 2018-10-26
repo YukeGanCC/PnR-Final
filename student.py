@@ -89,8 +89,7 @@ class Piggy(pigo.Pigo):
             print("I'll keep turning until it's clear")
             #while it's not clear
             while True:
-                self.wide_scan(count=4)
-                if self.is_clear():
+                if self.is_clear()= False:
                     self.encR(1)
                 else:
                     pass
