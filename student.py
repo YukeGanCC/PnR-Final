@@ -245,6 +245,28 @@ class Piggy(pigo.Pigo):
         while self.dist() > self.SAFE_STOP_DIST:
             #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
             time.sleep(.1)
+            self.wide_scan(count=10)  # scan the area
+            # create two variables, left_total and right_total
+            left_total = 0
+            right_total = 0
+            # loop from self.MIDPOINT - 60 to self.MIDPOINT
+            for angle in range(self.MIDPOINT - 60, self.MIDPOINT):
+                if self.scan[angle]:
+                    # add up the numbers to right_total
+                    right_total += self.scan[angle]
+            # loop from self.MIDPOINT to self.MIDPOINT + 60
+            for angle in range(self.MIDPOINT, self.MIDPOINT + 60):
+                if self.scan[angle]:
+                    # add up the numbers to left_total
+                    left_total += self.scan[angle]
+            # if right is bigger:
+            if right_total > left_total:
+                # turn right
+                self.encR(1)
+            # if left is bigger:
+            if left_total > right_total:
+                # turn left
+                self.encL(1)
         self.stop()
 ####################################################
 ############### STATIC FUNCTIONS
