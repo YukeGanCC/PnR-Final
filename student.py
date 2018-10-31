@@ -22,9 +22,9 @@ class Piggy(pigo.Pigo):
         self.SAFE_STOP_DIST = 50
         self.HARD_STOP_DIST = 15
         # YOU DECIDE: What left motor power helps straighten your fwd()?
-        self.LEFT_SPEED = 135
+        self.LEFT_SPEED = 120
         # YOU DECIDE: What left motor power helps straighten your fwd()?
-        self.RIGHT_SPEED = 140
+        self.RIGHT_SPEED = 125
         # This one isn't capitalized because it changes during runtime, the others don't
         self.turn_track = 0
         # Our scan list! The index will be the degree and it will store distance
@@ -242,13 +242,15 @@ class Piggy(pigo.Pigo):
     def cruise(self):
         """ drive straight while path is clear """
         self.fwd()
+        angle = self.MIDPOINT - 30
+        self.servo(angle)
+
         while self.dist() > self.SAFE_STOP_DIST:
+            angle += 30
             #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
-            time.sleep(.1)
-            if self.is_clear():
-                self.fwd()
-            else:
-                self.encL(1)
+            if angle == self.MIDPOINT +60:
+                angle = self.MIDPOINT -60
+            self.servo(angle)
             """self.wide_scan(count=10)  # scan the area
             # create two variables, left_total and right_total
             left_total = 0
