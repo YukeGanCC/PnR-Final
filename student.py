@@ -242,17 +242,15 @@ class Piggy(pigo.Pigo):
     def cruise(self):
         """ drive straight while path is clear """
         self.fwd()
-        while self.dist() > self.SAFE_STOP_DIST:
-            self.wide_scan(count=30)
-            for angle in range(self.MIDPOINT - 60, self.MIDPOINT + 60):
-                while self.scan(angle) >= 50:
-                    self.fwd()
-                self.encL(1)
+        angle = self.MIDPOINT - 60
+        self.servo(angle)
 
+        while self.dist() > self.SAFE_STOP_DIST:
+            angle += 30
             #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
-            """if angle == self.MIDPOINT +60:
+            if angle == self.MIDPOINT +60:
                 angle = self.MIDPOINT -60
-            self.servo(angle)"""
+            self.servo(angle)
             """self.wide_scan(count=30)  # scan the area
             # create two variables, left_total and right_total
             left_total = 0
