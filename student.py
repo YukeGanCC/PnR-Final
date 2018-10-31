@@ -246,7 +246,7 @@ class Piggy(pigo.Pigo):
             #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
             time.sleep(.1)
             if self.is_clear():
-                pass
+                self.fwd()
             else:
                 self.encL(1)
             """self.wide_scan(count=10)  # scan the area
