@@ -19,7 +19,7 @@ class Piggy(pigo.Pigo):
         # Our servo turns the sensor. What angle of the servo( ) method sets it straight?
         self.MIDPOINT = 75
         # YOU DECIDE: How close can an object get (cm) before we have to stop?
-        self.SAFE_STOP_DIST = 30
+        self.SAFE_STOP_DIST = 50
         self.HARD_STOP_DIST = 15
         # YOU DECIDE: What left motor power helps straighten your fwd()?
         self.LEFT_SPEED = 135
@@ -233,17 +233,17 @@ class Piggy(pigo.Pigo):
         print("-----------! NAVIGATION ACTIVATED !------------\n")
         print("-------- [ Press CTRL + C to stop me ] --------\n")
         print("-----------! NAVIGATION ACTIVATED !------------\n")
-        while True:
-            if self.is_clear():
-                self.cruise()
+        while True: #Check if it is clear over and over again.
+            if self.is_clear():#the method to check if it is clear
+                self.cruise()#keep moving
             else:
-                self.encR(10)
+                self.encR(3)#if there is not clear around, turn right.
 
     def cruise(self):
         """ drive straight while path is clear """
         self.fwd()
         while self.dist() > self.SAFE_STOP_DIST:
-            time.sleep(.5)
+            time.sleep(.1)
         self.stop()
 ####################################################
 ############### STATIC FUNCTIONS
