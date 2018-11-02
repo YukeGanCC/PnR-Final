@@ -252,7 +252,7 @@ class Piggy(pigo.Pigo):
         while self.dist() > self.SAFE_STOP_DIST:
             #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
             for angle in range(self.MIDPOINT-60, self.MIDPOINT+60, 30):
-                if self.scan[angle] and self.scan[angle]<30:
+                if self.scan[angle]<30:
                     self.encR(1)
         self.stop()
 ####################################################
