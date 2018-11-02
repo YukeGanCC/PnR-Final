@@ -227,6 +227,41 @@ class Piggy(pigo.Pigo):
         print("Safe to dance!")
         return True
 
+    def direction_choice(self):
+        self.wide_scan(count=4)  # scan the area
+        # create two variables, left_total and right_total
+        m={}
+        m['left1_total'] = 0
+        m['left2_total'] = 0
+        m['right1_total'] = 0
+        m['right2_total'] = 0
+        # loop from self.MIDPOINT - 60 to self.MIDPOINT
+        for angle in range(self.MIDPOINT - 60, self.MIDPOINT - 30):
+            if self.scan[angle]:
+                # add up the numbers to right_total
+                m['right1_total'] += self.scan[angle]
+        # loop from self.MIDPOINT to self.MIDPOINT + 60
+        for angle in range(self.MIDPOINT - 30, self.MIDPOINT):
+            if self.scan[angle]:
+                # add up the numbers to left_total
+                m['right2_total'] += self.scan[angle]
+        for angle in range(self.MIDPOINT, self.MIDPOINT + 30):
+            if self.scan[angle]:
+                m['left2_total'] += self.scan[angle]
+        for angle in range(self.MIDPOINT + 30, self.MIDPOINT + 60):
+            if self.scan[angle]:
+                m['left1_total'] += self.scan[angle]
+        # if left1 is bigger:
+        if max(m, key=m.get) = 'left1_total':
+            self.encL(8)
+        elif max(m, key=m.get) = 'left2_total':
+            self.encL(4)
+        elif max(m, key=m.get) = 'right1_total':
+            self.encR(8)
+        elif max(m, key=m.get) = 'right2_total':
+            self.encR(4)
+
+
     def nav(self):
         """auto pilots and attempts to maintain original heading"""
         logging.debug("Starting the nav method")
@@ -237,22 +272,17 @@ class Piggy(pigo.Pigo):
             if self.is_clear():#the method to check if it is clear
                 self.cruise()#keep moving
             else:#if it is not clear, find a path between right and left.
-                direction=self.choose_path()
-                if direction == "left":
-                    self.encL(3)
-                elif direction == "right":
-                    self.encR(3)
-                else:
-                    self.encB(5)
-                    self.encL(1)
+                self.encB(5)
+                self.direction_choice()
 
     def cruise(self):
         """ drive straight while path is clear """
         self.fwd()
         while self.dist() > self.SAFE_STOP_DIST:
             #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
-            for angle in range(self.MIDPOINT-60, self.MIDPOINT+60, 30):
+            for angle in range(self.MIDPOINT-30, self.MIDPOINT+30, 15):
                 if self.scan[angle]<30:
+                    self.encB(5)
                     self.encR(1)
         self.stop()
 ####################################################
