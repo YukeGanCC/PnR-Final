@@ -236,9 +236,7 @@ class Piggy(pigo.Pigo):
         while True: #Check if it is clear over and over again.
             if self.is_clear():#the method to check if it is clear
                 self.cruise()#keep moving
-            else:#if it is not clear, turn left 1 unit.
-                if self.dist()<10:
-                    self.encB(5)
+            else:#if it is not clear, find a path between right and left.
                 direction=self.choose_path()
                 if direction == "left":
                     self.encL(3)
