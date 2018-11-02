@@ -237,42 +237,25 @@ class Piggy(pigo.Pigo):
             if self.is_clear():#the method to check if it is clear
                 self.cruise()#keep moving
             else:#if it is not clear, turn left 1 unit.
-                self.encL(1)
+                if self.dist()<10:
+                    self.encB(5)
+                direction=self.choose_path()
+                if direction == "left":
+                    self.encL(3)
+                elif direction == "right":
+                    self.encR(3)
+                else:
+                    self.encB(5)
+                    self.encL(1)
 
     def cruise(self):
         """ drive straight while path is clear """
         self.fwd()
-        angle = self.MIDPOINT - 60
-        self.servo(angle)
-
         while self.dist() > self.SAFE_STOP_DIST:
-            angle += 30
             #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
-            if angle == self.MIDPOINT +60:
-                angle = self.MIDPOINT -60
-            self.servo(angle)
-            """self.wide_scan(count=30)  # scan the area
-            # create two variables, left_total and right_total
-            left_total = 0
-            right_total = 0
-            # loop from self.MIDPOINT - 60 to self.MIDPOINT
-            for angle in range(self.MIDPOINT - 60, self.MIDPOINT):
-                if self.scan[angle]:
-                    # add up the numbers to right_total
-                    right_total += self.scan[angle]
-            # loop from self.MIDPOINT to self.MIDPOINT + 60
-            for angle in range(self.MIDPOINT, self.MIDPOINT + 60):
-                if self.scan[angle]:
-                    # add up the numbers to left_total
-                    left_total += self.scan[angle]
-            # if right is bigger:
-            if right_total > left_total:
-                # turn right
-                self.encR(1)
-            # if left is bigger:
-            if left_total > right_total:
-                # turn left
-                self.encL(1)"""
+            for x in range(self.MIDPOINT-60, self.MIDPOINT+60, 30):
+                if self.scan[x] and self.scan[x]<60:
+                    self.encR(1)
         self.stop()
 ####################################################
 ############### STATIC FUNCTIONS
