@@ -252,13 +252,13 @@ class Piggy(pigo.Pigo):
             if self.scan[angle]:
                 m['left1_total'] += self.scan[angle]
         # if left1 is bigger:
-        if max(m, key=m.get) = 'left1_total':
+        if max(m, key=m.get) == 'left1_total':
             self.encL(8)
-        elif max(m, key=m.get) = 'left2_total':
+        elif max(m, key=m.get) == 'left2_total':
             self.encL(4)
-        elif max(m, key=m.get) = 'right1_total':
+        elif max(m, key=m.get) == 'right1_total':
             self.encR(8)
-        elif max(m, key=m.get) = 'right2_total':
+        elif max(m, key=m.get) == 'right2_total':
             self.encR(4)
 
 
