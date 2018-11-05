@@ -253,16 +253,16 @@ class Piggy(pigo.Pigo):
                 m['left1_total'] += self.scan[angle]
         # if left1 is bigger:
         if max(m, key=m.get) == 'left1_total':
-            self.encL(4)
+            self.encL(3)
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
-            self.encL(2)
+            self.encL(1)
         # if right1 is bigger:
         elif max(m, key=m.get) == 'right1_total':
-            self.encR(4)
+            self.encR(3)
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
-            self.encR(2)
+            self.encR(1)
 
 
     def nav(self):
@@ -291,7 +291,7 @@ class Piggy(pigo.Pigo):
                     self.encB(3)
                     self.encR(1)
                     print("BREAK THE LOOP")
-            break
+                break
         print("CRUISE WHILE LOOP STOPPED")
         self.stop()
 ####################################################
