@@ -283,15 +283,8 @@ class Piggy(pigo.Pigo):
         """ drive straight while path is clear """
         print("GO FORWARD!!!")
         self.fwd()
-        while self.dist() > self.SAFE_STOP_DIST:
-            #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
-            for angle in range(self.MIDPOINT-30, self.MIDPOINT+30, 15): # keep checking the distance on the other angles
-                self.servo(angle)
-                if self.dist() < 30: # if the distance on another angle is less than 30, go back and turn
-                    self.encB(3)
-                    self.encR(1)
-                    print("BREAK THE LOOP")
-                    break
+        while self.is_clear(count=30, step=15):
+            pass
         print("CRUISE WHILE LOOP STOPPED")
         self.stop()
 ####################################################
