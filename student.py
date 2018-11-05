@@ -253,16 +253,16 @@ class Piggy(pigo.Pigo):
                 m['left1_total'] += self.scan[angle]
         # if left1 is bigger:
         if max(m, key=m.get) == 'left1_total':
-            self.encL(8)
+            self.encL(5)
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
-            self.encL(4)
+            self.encL(2)
         # if right1 is bigger:
         elif max(m, key=m.get) == 'right1_total':
-            self.encR(8)
+            self.encR(5)
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
-            self.encR(4)
+            self.encR(2)
 
 
     def nav(self):
