@@ -288,6 +288,7 @@ class Piggy(pigo.Pigo):
                 if self.dist() < 30: # if the distance on another angle is less than 30, go back and turn
                     self.encB(3)
                     self.encR(1)
+                    print("Break the loop")
                     break
         self.stop()
 ####################################################
