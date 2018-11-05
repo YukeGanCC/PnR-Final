@@ -271,15 +271,16 @@ class Piggy(pigo.Pigo):
         print("-----------! NAVIGATION ACTIVATED !------------\n")
         print("-------- [ Press CTRL + C to stop me ] --------\n")
         print("-----------! NAVIGATION ACTIVATED !------------\n")
-        while True: #Check if it is clear over and over again.
-            if self.is_clear():#the method to check if it is clear
-                self.cruise()#keep moving
-            else:#if it is not clear, go back and find a path between right and left.
+        while True: # Check if it is clear over and over again.
+            if self.is_clear():  # the method to check if it is clear
+                self.cruise()  # keep moving
+            else:  # if it is not clear, go back and find a path between right and left.
                 self.encB(5)
                 self.direction_choice()
 
     def cruise(self):
         """ drive straight while path is clear """
+        print("GO FORWARD!!!")
         self.fwd()
         while self.dist() > self.SAFE_STOP_DIST:
             #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
@@ -290,6 +291,7 @@ class Piggy(pigo.Pigo):
                     self.encR(1)
                     print("Break the loop")
                     break
+        print("CRUISE WHILE LOOP STOPPED")
         self.stop()
 ####################################################
 ############### STATIC FUNCTIONS
