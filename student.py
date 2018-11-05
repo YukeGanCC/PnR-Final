@@ -291,7 +291,7 @@ class Piggy(pigo.Pigo):
                     self.encB(3)
                     self.encR(1)
                     print("BREAK THE LOOP")
-                break
+                    break
         print("CRUISE WHILE LOOP STOPPED")
         self.stop()
 ####################################################
