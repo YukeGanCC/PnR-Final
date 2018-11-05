@@ -285,9 +285,6 @@ class Piggy(pigo.Pigo):
         self.fwd()
         while self.is_clear(count=30, step=15):
             pass
-        while not self.is_clear(count=30. step=15):
-            self.encB(1)
-            self.encL(1)
         print("CRUISE WHILE LOOP STOPPED")
         self.stop()
 ####################################################
