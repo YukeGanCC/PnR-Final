@@ -272,6 +272,7 @@ class Piggy(pigo.Pigo):
         print("-------- [ Press CTRL + C to stop me ] --------\n")
         print("-----------! NAVIGATION ACTIVATED !------------\n")
         while True: # Check if it is clear over and over again.
+            print("TOP OF NAV LOOP")
             if self.is_clear():  # the method to check if it is clear
                 self.cruise()  # keep moving
             else:  # if it is not clear, go back and find a path between right and left.
