@@ -22,9 +22,9 @@ class Piggy(pigo.Pigo):
         self.SAFE_STOP_DIST = 30
         self.HARD_STOP_DIST = 15
         # YOU DECIDE: What left motor power helps straighten your fwd()?
-        self.LEFT_SPEED = 120
+        self.LEFT_SPEED = 110
         # YOU DECIDE: What left motor power helps straighten your fwd()?
-        self.RIGHT_SPEED = 125
+        self.RIGHT_SPEED = 115
         # This one isn't capitalized because it changes during runtime, the others don't
         self.turn_track = 0
         # Our scan list! The index will be the degree and it will store distance
@@ -227,37 +227,40 @@ class Piggy(pigo.Pigo):
         print("Safe to dance!")
         return True
 
-    def direction_choice(self):
+    def direction_choice(self):#the method to choose direction between left and right
         self.wide_scan(count=4)  # scan the area
-        # create two variables, left_total and right_total
-        m={}
-        m['left1_total'] = 0
-        m['left2_total'] = 0
-        m['right1_total'] = 0
-        m['right2_total'] = 0
-        # loop from self.MIDPOINT - 60 to self.MIDPOINT
+        # create 4 variables, use to compare the value later
+        m = {'left1_total': 0, 'left2_total': 0, 'right1_total': 0, 'right2_total': 0}
+        # loop from self.MIDPOINT - 60 to self.MIDPOINT - 30
         for angle in range(self.MIDPOINT - 60, self.MIDPOINT - 30):
             if self.scan[angle]:
-                # add up the numbers to right_total
+                # add up the numbers to right1_total
                 m['right1_total'] += self.scan[angle]
-        # loop from self.MIDPOINT to self.MIDPOINT + 60
+        # loop from self.MIDPOINT - 30 to self.MIDPOINT
         for angle in range(self.MIDPOINT - 30, self.MIDPOINT):
             if self.scan[angle]:
-                # add up the numbers to left_total
+                # add up the numbers to right2_total
                 m['right2_total'] += self.scan[angle]
+        # loop from self.MIDPOINT to self.MIDPOINT + 30
         for angle in range(self.MIDPOINT, self.MIDPOINT + 30):
             if self.scan[angle]:
+                # add up the numbers to left2_total
                 m['left2_total'] += self.scan[angle]
+        # loop from self.MIDPOINT + 30 to self.MIDPOINT + 60
         for angle in range(self.MIDPOINT + 30, self.MIDPOINT + 60):
             if self.scan[angle]:
+                # add up the numbers to left1_total
                 m['left1_total'] += self.scan[angle]
         # if left1 is bigger:
         if max(m, key=m.get) == 'left1_total':
             self.encL(8)
+        # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
             self.encL(4)
+        # if right1 is bigger:
         elif max(m, key=m.get) == 'right1_total':
             self.encR(8)
+        # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
             self.encR(4)
 
@@ -271,7 +274,7 @@ class Piggy(pigo.Pigo):
         while True: #Check if it is clear over and over again.
             if self.is_clear():#the method to check if it is clear
                 self.cruise()#keep moving
-            else:#if it is not clear, find a path between right and left.
+            else:#if it is not clear, go back and find a path between right and left.
                 self.encB(5)
                 self.direction_choice()
 
@@ -280,10 +283,12 @@ class Piggy(pigo.Pigo):
         self.fwd()
         while self.dist() > self.SAFE_STOP_DIST:
             #if the distance is bigger than the safe distance that set before, keep checking until less distance to stop.
-            for angle in range(self.MIDPOINT-30, self.MIDPOINT+30, 15):
-                if self.scan[angle]<30:
-                    self.encB(5)
+            for angle in range(self.MIDPOINT-30, self.MIDPOINT+30, 15): # keep checking the distance on the other angles
+                self.servo(angle)
+                if self.dist() < 40: # if the distance on another angle is less than 40, go back and turn
+                    self.encB(3)
                     self.encR(1)
+                    break
         self.stop()
 ####################################################
 ############### STATIC FUNCTIONS
