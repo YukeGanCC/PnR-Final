@@ -255,7 +255,7 @@ class Piggy(pigo.Pigo):
         '''if m['left1_total'] + m['right1_total'] + m['right2_total'] + m['left2_total'] < 600:
             self.encL(6)'''
         #  if left1 is bigger:
-        elif max(m, key=m.get) == 'left1_total':
+        if max(m, key=m.get) == 'left1_total':
             self.encL(3)
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
