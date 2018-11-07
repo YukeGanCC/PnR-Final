@@ -228,7 +228,7 @@ class Piggy(pigo.Pigo):
         return True
 
     def direction_choice(self):#the method to choose direction between left and right
-        self.wide_scan(count=4)  # scan the area
+        self.wide_scan(count=5)  # scan the area
         # create 4 variables, use to compare the value later
         m = {'left1_total': 0, 'left2_total': 0, 'right1_total': 0, 'right2_total': 0}
         # loop from self.MIDPOINT - 60 to self.MIDPOINT - 30
@@ -251,9 +251,11 @@ class Piggy(pigo.Pigo):
             if self.scan[angle]:
                 # add up the numbers to left1_total
                 m['left1_total'] += self.scan[angle]
-        # if left1 is bigger:
-        #if m['left1_total'] <
-        if max(m, key=m.get) == 'left1_total':
+
+        if m['left1_total'] < 300 or m['right1_total'] < 300 or m['right2_total'] < 300 or m['left2_total'] < 300:
+            self.encL(1)
+        #  if left1 is bigger:
+        elif max(m, key=m.get) == 'left1_total':
             self.encL(3)
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
