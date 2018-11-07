@@ -252,7 +252,7 @@ class Piggy(pigo.Pigo):
                 # add up the numbers to left1_total
                 m['left1_total'] += self.scan[angle]
 
-        if m['left1_total'] < 300 or m['right1_total'] < 300 or m['right2_total'] < 300 or m['left2_total'] < 300:
+        if m['left1_total'] + m['right1_total'] + m['right2_total'] + m['left2_total'] < 1000:
             self.encL(1)
         #  if left1 is bigger:
         elif max(m, key=m.get) == 'left1_total':
