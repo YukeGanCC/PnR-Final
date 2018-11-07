@@ -252,6 +252,7 @@ class Piggy(pigo.Pigo):
                 # add up the numbers to left1_total
                 m['left1_total'] += self.scan[angle]
         # if left1 is bigger:
+        #if m['left1_total'] <
         if max(m, key=m.get) == 'left1_total':
             self.encL(3)
         # if left2 is bigger:
@@ -276,9 +277,9 @@ class Piggy(pigo.Pigo):
             if self.is_clear():  # the method to check if it is clear
                 self.cruise()  # keep moving
             else:  # if it is not clear, go back and find a path between right and left.
-                """self.encB(5)
-                self.direction_choice()"""
-                self.encL(1)
+                self.encB(5)
+                self.direction_choice()
+                #self.encL(1)
 
 
 
