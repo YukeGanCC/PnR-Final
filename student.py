@@ -278,11 +278,16 @@ class Piggy(pigo.Pigo):
             else:  # if it is not clear, go back and find a path between right and left.
                 self.encB(5)
                 self.direction_choice()
+                if not self.is_clear():
+                    self.encL(1)
+                else:
+                    self.cruise()
+
 
     def cruise(self):
         """ drive straight while path is clear """
-        print("GO FORWARD!!!")
-        self.fwd()
+        print("GO FORWARD!!!") # signal that robot is running this method
+        self.fwd() # robot keeps going forward
         while self.is_clear(count=30, step=15):
             pass
         print("CRUISE WHILE LOOP STOPPED")
