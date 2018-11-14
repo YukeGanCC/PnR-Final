@@ -227,7 +227,7 @@ class Piggy(pigo.Pigo):
         print("Safe to dance!")
         return True
 
-    def direction_choice(self):#the method to choose direction between left and right
+    def direction_choice(self): # the method to choose direction that where has the longest distance to go
         self.wide_scan(count=5)  # scan the area
         # create 4 variables, use to compare the value later
         m = {'left1_total': 0, 'left2_total': 0, 'right1_total': 0, 'right2_total': 0}
@@ -235,37 +235,37 @@ class Piggy(pigo.Pigo):
         for angle in range(self.MIDPOINT - 60, self.MIDPOINT - 30):
             if self.scan[angle]:
                 # add up the numbers to right1_total
-                m['right1_total'] += self.scan[angle]
+                m['right1_total'] += self.scan[angle] # this is used to compare the distance later
         # loop from self.MIDPOINT - 30 to self.MIDPOINT
         for angle in range(self.MIDPOINT - 30, self.MIDPOINT):
             if self.scan[angle]:
                 # add up the numbers to right2_total
-                m['right2_total'] += self.scan[angle]
+                m['right2_total'] += self.scan[angle] # this is used to compare the distance later
         # loop from self.MIDPOINT to self.MIDPOINT + 30
         for angle in range(self.MIDPOINT, self.MIDPOINT + 30):
             if self.scan[angle]:
                 # add up the numbers to left2_total
-                m['left2_total'] += self.scan[angle]
+                m['left2_total'] += self.scan[angle] # this is used to compare the distance later
         # loop from self.MIDPOINT + 30 to self.MIDPOINT + 60
         for angle in range(self.MIDPOINT + 30, self.MIDPOINT + 60):
             if self.scan[angle]:
                 # add up the numbers to left1_total
-                m['left1_total'] += self.scan[angle]
+                m['left1_total'] += self.scan[angle] # this is used to compare the distance later
 
         '''if m['left1_total'] + m['right1_total'] + m['right2_total'] + m['left2_total'] < 600:
             self.encL(6)'''
         #  if left1 is bigger:
         if max(m, key=m.get) == 'left1_total':
-            self.encL(3)
+            self.encL(3) # turn left 3 units
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
-            self.encL(2)
+            self.encL(2) # turn left 2 units
         # if right1 is bigger:
         elif max(m, key=m.get) == 'right1_total':
-            self.encR(3)
+            self.encR(3) # turn right 3 units
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
-            self.encR(2)
+            self.encR(2) # turn right 2 units
 
 
     def nav(self):
@@ -275,13 +275,13 @@ class Piggy(pigo.Pigo):
         print("-------  [ Press CTRL + C to stop me ]  -------\n")
         print("-----------! NAVIGATION ACTIVATED !------------\n")
         while True: # Check if it is clear over and over again.
-            print("TOP OF NAV LOOP")
+            print("TOP OF NAV LOOP") # sign to start while true loop
             if self.is_clear():  # the method to check if it is clear
-                self.cruise()  # keep moving
+                self.cruise()  # if the area is clear, start self.cruise method
             else:  # if it is not clear, go back and find a path between right and left.
                 self.encB(3)
                 self.direction_choice()
-                #self.encL(1)
+
 
 
 
@@ -289,10 +289,10 @@ class Piggy(pigo.Pigo):
         """ drive straight while path is clear """
         print("GO FORWARD!!!") # signal that robot is running this method
         self.fwd() # robot keeps going forward
-        while self.is_clear(count=30, step=15):
-            pass
+        while self.is_clear(count=30, step=15): # scan the area from midpoint - 30 to midpoint + 30, each time +15 degree
+            pass # if it is clear, do nothing.
         print("CRUISE WHILE LOOP STOPPED")
-        self.stop()
+        self.stop() # if the area is not clear, stop, and go back to self.nav method
 ####################################################
 ############### STATIC FUNCTIONS
 
