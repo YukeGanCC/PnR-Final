@@ -289,7 +289,7 @@ class Piggy(pigo.Pigo):
         """ drive straight while path is clear """
         print("GO FORWARD!!!") # signal that robot is running this method
         self.fwd() # robot keeps going forward
-        while self.is_clear(count=30, step=15): # scan the area from midpoint - 30 to midpoint + 30, each time +15 degree
+        while self.is_clear(count=30, step=30): # scan the area from midpoint - 30 to midpoint + 30, each time +15 degree
             pass # if it is clear, do nothing.
         print("CRUISE WHILE LOOP STOPPED")
         self.stop() # if the area is not clear, stop, and go back to self.nav method
