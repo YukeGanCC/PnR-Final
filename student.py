@@ -22,7 +22,7 @@ class Piggy(pigo.Pigo):
         self.SAFE_STOP_DIST = 40
         self.HARD_STOP_DIST = 15
         # YOU DECIDE: What left motor power helps straighten your fwd()?
-        self.LEFT_SPEED = 120
+        self.LEFT_SPEED = 119
         # YOU DECIDE: What left motor power helps straighten your fwd()?
         self.RIGHT_SPEED = 125
         # This one isn't capitalized because it changes during runtime, the others don't
