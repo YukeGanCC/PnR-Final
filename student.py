@@ -22,9 +22,9 @@ class Piggy(pigo.Pigo):
         self.SAFE_STOP_DIST = 40
         self.HARD_STOP_DIST = 15
         # YOU DECIDE: What left motor power helps straighten your fwd()?
-        self.LEFT_SPEED = 119
+        self.LEFT_SPEED = 125
         # YOU DECIDE: What left motor power helps straighten your fwd()?
-        self.RIGHT_SPEED = 123
+        self.RIGHT_SPEED = 129
         # This one isn't capitalized because it changes during runtime, the others don't
         self.turn_track = 0
         # Our scan list! The index will be the degree and it will store distance
@@ -266,7 +266,6 @@ class Piggy(pigo.Pigo):
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
             self.encR(2) # turn right 2 units
-
 
     def nav(self):
         """auto pilots and attempts to maintain original heading"""
