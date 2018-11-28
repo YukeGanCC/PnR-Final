@@ -256,13 +256,13 @@ class Piggy(pigo.Pigo):
             self.encL(6)'''
         #  if left1 is bigger:
         if max(m, key=m.get) == 'left1_total':
-            self.encL(3.5) # turn left 3 units
+            self.encL(4) # turn left 3 units
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
             self.encL(2) # turn left 2 units
         # if right1 is bigger:
         elif max(m, key=m.get) == 'right1_total':
-            self.encR(3.5) # turn right 3 units
+            self.encR(4) # turn right 3 units
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
             self.encR(2) # turn right 2 units
