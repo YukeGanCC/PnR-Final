@@ -254,8 +254,11 @@ class Piggy(pigo.Pigo):
 
         '''if m['left1_total'] + m['right1_total'] + m['right2_total'] + m['left2_total'] < 600:
             self.encL(6)'''
-        #  if left1 is bigger:
-        if max(m, key=m.get) == 'left1_total':
+        # check if no turn is necessary, perhaps choose_direction was activated by error
+        if is_clear_infront():
+            self.cruise()
+        # if left1 is bigger:
+        elif max(m, key=m.get) == 'left1_total':
             self.encL(3) # turn left 3 units
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
@@ -266,6 +269,12 @@ class Piggy(pigo.Pigo):
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
             self.encR(2) # turn right 2 units
+    def is_clear_infront(self):
+        """ checks the scan array to see if there's a path dead ahead """
+        # check for obstacles
+        for angle in range(self.MIDPOINT - 10, self.MIDPOINT +10):
+            if self.scan[angle] and self.scan[angle] < self.SAFE_STOP_DIST:
+                return False
 
     def nav(self):
         """auto pilots and attempts to maintain original heading"""
