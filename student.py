@@ -227,6 +227,14 @@ class Piggy(pigo.Pigo):
         print("Safe to dance!")
         return True
 
+    def is_clear_infront(self):
+        """ checks the scan array to see if there's a path dead ahead """
+        # check for obstacles
+        for angle in range(self.MIDPOINT - 10, self.MIDPOINT +10):
+            if self.scan[angle] and self.scan[angle] < self.SAFE_STOP_DIST:
+                return False
+
+
     def direction_choice(self): # the method to choose direction that where has the longest distance to go
         self.wide_scan(count=5)  # scan the area
         # create 4 variables, use to compare the value later
@@ -269,12 +277,7 @@ class Piggy(pigo.Pigo):
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
             self.encR(2) # turn right 2 units
-    def is_clear_infront(self):
-        """ checks the scan array to see if there's a path dead ahead """
-        # check for obstacles
-        for angle in range(self.MIDPOINT - 10, self.MIDPOINT +10):
-            if self.scan[angle] and self.scan[angle] < self.SAFE_STOP_DIST:
-                return False
+
 
     def nav(self):
         """auto pilots and attempts to maintain original heading"""
