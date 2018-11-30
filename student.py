@@ -263,7 +263,7 @@ class Piggy(pigo.Pigo):
         '''if m['left1_total'] + m['right1_total'] + m['right2_total'] + m['left2_total'] < 600:
             self.encL(6)'''
         # check if no turn is necessary, perhaps choose_direction was activated by error
-        if is_clear_infront():
+        if self.is_clear_infront():
             self.cruise()
         # if left1 is bigger:
         elif max(m, key=m.get) == 'left1_total':
