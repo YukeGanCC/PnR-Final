@@ -268,15 +268,19 @@ class Piggy(pigo.Pigo):
         # if left1 is bigger:
         elif max(m, key=m.get) == 'left1_total':
             self.encL(3) # turn left 3 units
+            error_count += 2
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
             self.encL(2) # turn left 2 units
+            error_count += 1
         # if right1 is bigger:
         elif max(m, key=m.get) == 'right1_total':
             self.encR(3) # turn right 3 units
+            error_count -= 2
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
             self.encR(2) # turn right 2 units
+            error_count -= 1
 
 
     def nav(self):
@@ -289,15 +293,21 @@ class Piggy(pigo.Pigo):
         error_count = 0
         while True: # Check if it is clear over and over again.
             print("TOP OF NAV LOOP") # sign to start while true loop
+            error_count = 0
             if self.is_clear():  # the method to check if it is clear
                 self.cruise()  # if the area is clear, start self.cruise method
-                error_count = 0
             else:  # if it is not clear, go back and find a path between right and left.
-                error_count += 1
-                if error_count == 10:
+                if error_count > 6:
                     raw_input("Hey, what's up?")
-                self.encB(2)
-                self.direction_choice()
+                    self.encB(3)
+                    self.encR(5)
+                elif error_count < -6:
+                    raw_input("Hey, what's up?")
+                    self.encB(3)
+                    self.encL(5)
+                else:
+                    self.encB(2)
+                    self.direction_choice()
 
 
 
