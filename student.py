@@ -29,12 +29,14 @@ class Piggy(pigo.Pigo):
         self.turn_track = 0
         # Our scan list! The index will be the degree and it will store distance
         self.scan = [None] * 180
+        self.turn_count=0
         self.set_speed(self.LEFT_SPEED, self.RIGHT_SPEED)
         # let's use an event-driven model, make a handler of sorts to listen for "events"
         if __name__ == "__main__":
             while True:
                 self.stop()
                 self.menu()
+
 
     def menu(self):
         """Displays menu dictionary, takes key-input and calls method"""
@@ -268,19 +270,19 @@ class Piggy(pigo.Pigo):
         # if left1 is bigger:
         elif max(m, key=m.get) == 'left1_total':
             self.encL(3) # turn left 3 units
-            error_count += 2
+            self.turn_count += 2
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
             self.encL(2) # turn left 2 units
-            error_count += 1
+            self.turn_count += 1
         # if right1 is bigger:
         elif max(m, key=m.get) == 'right1_total':
             self.encR(3) # turn right 3 units
-            error_count -= 2
+            self.turn_count -= 2
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
             self.encR(2) # turn right 2 units
-            error_count -= 1
+            self.turn_count -= 1
 
 
     def nav(self):
@@ -293,15 +295,14 @@ class Piggy(pigo.Pigo):
         error_count = 0
         while True: # Check if it is clear over and over again.
             print("TOP OF NAV LOOP") # sign to start while true loop
-            error_count = 0
             if self.is_clear():  # the method to check if it is clear
                 self.cruise()  # if the area is clear, start self.cruise method
             else:  # if it is not clear, go back and find a path between right and left.
-                if error_count > 6:
+                if self.turn_count > 6:
                     raw_input("Hey, what's up?")
                     self.encB(3)
                     self.encR(5)
-                elif error_count < -6:
+                elif self.turn_count < -6:
                     raw_input("Hey, what's up?")
                     self.encB(3)
                     self.encL(5)
