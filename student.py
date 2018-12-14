@@ -234,7 +234,8 @@ class Piggy(pigo.Pigo):
         # check for obstacles
         for angle in range(self.MIDPOINT - 5, self.MIDPOINT +5):
             if self.scan[angle] and self.scan[angle] < self.SAFE_STOP_DIST:
-                # if the distance between mid-5 and mid+5 is bigger than the safe stop distance, go straight rather than turning left or right
+                '''if the distance between mid-5 and mid+5 is bigger than the safe stop distance, 
+                go straight rather than turning left or right'''
                 return False
 
 
@@ -317,22 +318,26 @@ class Piggy(pigo.Pigo):
                 # if the area is clear, start self.cruise method
             else:
                 # if it is not clear, go back and find a path between right and left.
-                if self.turn_count > 6:
+                if self.turn_count > 7:
                     '''if the error count is too big, 
                     the robot might go to the opposite direction, 
                     which need to turn another way'''
                     raw_input("Hey, what's up?")
                     # check if the robot need to fix its way
                     self.encB(3)
-                    self.encR(5)
-                elif self.turn_count < -6:
+                    self.encR(10)
+                    self.turn_count -= 7
+                    # make the error count back to zero
+                elif self.turn_count < -7:
                     '''if the error count is too small, 
                     the robot might go to the opposite direction, 
                     which need to turn another way'''
                     raw_input("Hey, what's up?")
                     # check if the robot need to fix its way
                     self.encB(3)
-                    self.encL(5)
+                    self.encL(10)
+                    self.turn_count += 7
+                    # make the error count back to zero
                 else:
                     self.encB(2)
                     self.direction_choice()
