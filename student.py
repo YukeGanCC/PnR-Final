@@ -232,7 +232,7 @@ class Piggy(pigo.Pigo):
     def is_clear_infront(self):
         """ checks the scan array to see if there's a path dead ahead """
         # check for obstacles
-        for angle in range(self.MIDPOINT - 10, self.MIDPOINT +10):
+        for angle in range(self.MIDPOINT - 5, self.MIDPOINT +5):
             if self.scan[angle] and self.scan[angle] < self.SAFE_STOP_DIST:
                 return False
 
