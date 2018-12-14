@@ -234,28 +234,34 @@ class Piggy(pigo.Pigo):
         # check for obstacles
         for angle in range(self.MIDPOINT - 5, self.MIDPOINT +5):
             if self.scan[angle] and self.scan[angle] < self.SAFE_STOP_DIST:
+                # if the distance between mid-5 and mid+5 is bigger than the safe stop distance, go straight rather than turning left or right
                 return False
 
 
-    def direction_choice(self): # the method to choose direction that where has the longest distance to go
-        self.wide_scan(count=5)  # scan the area
+    def direction_choice(self):
+        # the method to choose direction that where has the longest distance to go
+        self.wide_scan(count=5)
+        # scan the area
         # create 4 variables, use to compare the value later
         m = {'left1_total': 0, 'left2_total': 0, 'right1_total': 0, 'right2_total': 0}
         # loop from self.MIDPOINT - 60 to self.MIDPOINT - 30
         for angle in range(self.MIDPOINT - 60, self.MIDPOINT - 30):
             if self.scan[angle]:
                 # add up the numbers to right1_total
-                m['right1_total'] += self.scan[angle] # this is used to compare the distance later
+                m['right1_total'] += self.scan[angle]
+                # this is used to compare the distance later
         # loop from self.MIDPOINT - 30 to self.MIDPOINT
         for angle in range(self.MIDPOINT - 30, self.MIDPOINT):
             if self.scan[angle]:
                 # add up the numbers to right2_total
-                m['right2_total'] += self.scan[angle] # this is used to compare the distance later
+                m['right2_total'] += self.scan[angle]
+                # this is used to compare the distance later
         # loop from self.MIDPOINT to self.MIDPOINT + 30
         for angle in range(self.MIDPOINT, self.MIDPOINT + 30):
             if self.scan[angle]:
                 # add up the numbers to left2_total
-                m['left2_total'] += self.scan[angle] # this is used to compare the distance later
+                m['left2_total'] += self.scan[angle]
+                # this is used to compare the distance later
         # loop from self.MIDPOINT + 30 to self.MIDPOINT + 60
         for angle in range(self.MIDPOINT + 30, self.MIDPOINT + 60):
             if self.scan[angle]:
@@ -269,20 +275,28 @@ class Piggy(pigo.Pigo):
             self.cruise()
         # if left1 is bigger:
         elif max(m, key=m.get) == 'left1_total':
-            self.encL(3) # turn left 3 units
+            self.encL(3)
+            # turn left 3 units
             self.turn_count += 2
+            # when robot turn 3 units left, add 2 to the error count
         # if left2 is bigger:
         elif max(m, key=m.get) == 'left2_total':
-            self.encL(2) # turn left 2 units
+            self.encL(2)
+            # turn left 2 units
             self.turn_count += 1
+            # when robot turn 2 units left, add 1 to the error count
         # if right1 is bigger:
         elif max(m, key=m.get) == 'right1_total':
-            self.encR(3) # turn right 3 units
+            self.encR(3)
+            # turn right 3 units
             self.turn_count -= 2
+            # when robot turn 3 units right, minus 2 to the error count
         # if right2 is bigger:
         elif max(m, key=m.get) == 'right2_total':
-            self.encR(2) # turn right 2 units
+            self.encR(2)
+            # turn right 2 units
             self.turn_count -= 1
+            # when robot turn 2 units right, minus 1 to the error count
 
 
     def nav(self):
@@ -293,17 +307,30 @@ class Piggy(pigo.Pigo):
         print("-----------! NAVIGATION ACTIVATED !------------\n")
 
         error_count = 0
-        while True: # Check if it is clear over and over again.
-            print("TOP OF NAV LOOP") # sign to start while true loop
-            if self.is_clear():  # the method to check if it is clear
-                self.cruise()  # if the area is clear, start self.cruise method
-            else:  # if it is not clear, go back and find a path between right and left.
+        while True:
+            # Check if it is clear over and over again.
+            print("TOP OF NAV LOOP")
+            # sign to start while true loop
+            if self.is_clear():
+                # the method to check if it is clear
+                self.cruise()
+                # if the area is clear, start self.cruise method
+            else:
+                # if it is not clear, go back and find a path between right and left.
                 if self.turn_count > 6:
+                    '''if the error count is too big, 
+                    the robot might go to the opposite direction, 
+                    which need to turn another way'''
                     raw_input("Hey, what's up?")
+                    # check if the robot need to fix its way
                     self.encB(3)
                     self.encR(5)
                 elif self.turn_count < -6:
+                    '''if the error count is too small, 
+                    the robot might go to the opposite direction, 
+                    which need to turn another way'''
                     raw_input("Hey, what's up?")
+                    # check if the robot need to fix its way
                     self.encB(3)
                     self.encL(5)
                 else:
@@ -317,10 +344,13 @@ class Piggy(pigo.Pigo):
         """ drive straight while path is clear """
         print("GO FORWARD!!!") # signal that robot is running this method
         self.fwd() # robot keeps going forward
-        while self.is_clear(count=30, step=30): # scan the area from midpoint - 30 to midpoint + 30, each time +15 degree
-            pass # if it is clear, do nothing.
+        while self.is_clear(count=30, step=30):
+            # scan the area from midpoint-30 to midpoint+30, each time +15 degree
+            pass
+            # if it is clear, do nothing.
         print("CRUISE WHILE LOOP STOPPED")
-        self.stop() # if the area is not clear, stop, and go back to self.nav method
+        self.stop()
+        # if the area is not clear, stop, and go back to self.nav method
 ####################################################
 ############### STATIC FUNCTIONS
 
